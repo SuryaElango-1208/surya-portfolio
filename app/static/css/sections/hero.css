@@ -1,0 +1,142 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+
+/* ---- Ambient node network: the signature motif, seeded here, paid off
+   literally in the Architecture section. Kept low-opacity and slow so it
+   reads as atmosphere, not decoration competing with the text. ---- */
+.hero__network {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.hero__lines line {
+  stroke: var(--color-border-strong);
+  stroke-width: 1;
+}
+
+.hero__lines--active line {
+  stroke: var(--color-accent);
+  stroke-width: 1.2;
+  stroke-dasharray: 6 10;
+  opacity: 0.55;
+  animation: dash-flow 3.5s linear infinite;
+}
+
+.hero__nodes circle {
+  fill: var(--color-text-tertiary);
+  animation: node-float 7s var(--ease-out-expo) infinite;
+  animation-delay: var(--delay, 0s);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.hero__lines--active + .hero__nodes circle,
+.hero__nodes circle:nth-child(6),
+.hero__nodes circle:nth-child(7),
+.hero__nodes circle:nth-child(8) {
+  fill: var(--color-accent);
+}
+
+@keyframes node-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -32; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__nodes circle,
+  .hero__lines--active line {
+    animation: none;
+  }
+}
+
+/* ---- Content ---- */
+.hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.hero__name {
+  font-size: var(--text-hero);
+  font-weight: 500;
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+.hero__role {
+  font-size: var(--text-xl);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-6);
+}
+
+.hero__role-divider {
+  color: var(--color-accent);
+}
+
+.hero__intro {
+  font-size: var(--text-lg);
+  max-width: 52ch;
+  margin-bottom: var(--space-10);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+/* ---- Scroll cue ---- */
+.hero__scroll-cue {
+  position: absolute;
+  bottom: var(--space-8);
+  left: var(--content-padding);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary);
+}
+
+.hero__scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(var(--color-text-tertiary), transparent);
+  animation: scroll-pulse 2.2s var(--ease-out-expo) infinite;
+}
+
+@keyframes scroll-pulse {
+  0% { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  40% { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  60% { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-line {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero__scroll-cue {
+    display: none;
+  }
+}

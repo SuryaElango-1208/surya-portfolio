@@ -1,0 +1,10 @@
+<section class="section section--editorial" id="about">
+  <div class="section-inner">
+    <div class="section-eyebrow reveal">About</div>
+    <div class="about__paragraphs">
+      {% for para in about.paragraphs %}
+      <p class="about__para reveal" style="--reveal-delay: {{ loop.index0 * 90 }}ms">{{ para }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>

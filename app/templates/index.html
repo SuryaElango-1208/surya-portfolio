@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ profile.name }} — {{ profile.title }}</title>
+  <meta name="description" content="{{ profile.intro }}" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="{{ profile.name }} — {{ profile.title }}" />
+  <meta property="og:description" content="{{ profile.intro }}" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" type="image/svg+xml" href="/static/images/favicon.svg" />
+
+  <!-- Fonts: Fraunces (display) + IBM Plex Sans (body) + IBM Plex Mono (utility).
+       Preconnect first so the browser opens the connection before it even
+       finishes parsing <head> — shaves a real round-trip off first paint. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="/static/css/tokens.css" />
+  <link rel="stylesheet" href="/static/css/base.css" />
+  <link rel="stylesheet" href="/static/css/layout.css" />
+  <link rel="stylesheet" href="/static/css/components.css" />
+  <link rel="stylesheet" href="/static/css/sections/nav-footer.css" />
+  <link rel="stylesheet" href="/static/css/sections/hero.css" />
+  <link rel="stylesheet" href="/static/css/sections/about.css" />
+  <link rel="stylesheet" href="/static/css/sections/experience.css" />
+  <link rel="stylesheet" href="/static/css/sections/highlights.css" />
+  <link rel="stylesheet" href="/static/css/sections/architecture.css" />
+  <link rel="stylesheet" href="/static/css/sections/skills.css" />
+  <link rel="stylesheet" href="/static/css/sections/certifications.css" />
+  <link rel="stylesheet" href="/static/css/sections/achievement.css" />
+  <link rel="stylesheet" href="/static/css/sections/contact.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  {% include "partials/nav.html" %}
+
+  <main id="main">
+    {% include "partials/hero.html" %}
+    {% include "partials/about.html" %}
+    {% include "partials/experience.html" %}
+    {% include "partials/highlights.html" %}
+    {% include "partials/architecture.html" %}
+    {% include "partials/skills.html" %}
+    {% include "partials/certifications.html" %}
+    {% include "partials/achievement.html" %}
+    {% include "partials/contact.html" %}
+  </main>
+
+  {% include "partials/footer.html" %}
+
+  <script src="/static/js/main.js" type="module"></script>
+</body>
+</html>

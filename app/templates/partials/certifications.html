@@ -1,0 +1,23 @@
+<section class="section" id="certifications">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Certifications</div>
+      <h2 class="section-heading">Keeping the fundamentals current</h2>
+    </div>
+
+    <div class="cert-grid">
+      {% for cert in certifications %}
+      <div class="cert-card reveal" style="--reveal-delay: {{ loop.index0 * 60 }}ms">
+        <div class="cert-card__top">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M12 2l2.9 6 6.6.6-5 4.5 1.5 6.5-6-3.5-6 3.5 1.5-6.5-5-4.5 6.6-.6z" />
+          </svg>
+          {% if cert.year %}<span class="cert-card__year">{{ cert.year }}</span>{% endif %}
+        </div>
+        <h3 class="cert-card__name">{{ cert.name }}</h3>
+        <p class="cert-card__issuer">{{ cert.issuer }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,70 @@
+<section class="section" id="architecture">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Architecture Showcase</div>
+      <h2 class="section-heading">How the automation platform actually flows</h2>
+      <p class="section-lede">Select any layer to see what it does, how it talks to the next one, and why it's built that way.</p>
+    </div>
+
+    <div class="arch reveal">
+      <div class="arch__diagram">
+        <button class="arch-node is-active" data-node-id="client" type="button" aria-pressed="true">
+          <span class="arch-node__label">Client Interface</span>
+          <span class="arch-node__short">Browser-based entry point</span>
+        </button>
+
+        <div class="arch__connector"><span></span></div>
+
+        <button class="arch-node" data-node-id="fastapi" type="button" aria-pressed="false">
+          <span class="arch-node__label">FastAPI</span>
+          <span class="arch-node__short">Secure web & API layer</span>
+        </button>
+
+        <div class="arch__connector"><span></span></div>
+
+        <button class="arch-node arch-node--engine" data-node-id="engine" type="button" aria-pressed="false">
+          <span class="arch-node__label">Python Automation Engine</span>
+          <span class="arch-node__short">Core orchestration layer</span>
+        </button>
+
+        <div class="arch__connector arch__connector--branch">
+          <span></span>
+        </div>
+
+        <div class="arch__branches">
+          <button class="arch-node arch-node--branch" data-node-id="sap" type="button" aria-pressed="false">
+            <span class="arch-node__label">SAP</span>
+            <span class="arch-node__short">via PyRFC</span>
+          </button>
+          <button class="arch-node arch-node--branch" data-node-id="windows" type="button" aria-pressed="false">
+            <span class="arch-node__label">Windows</span>
+            <span class="arch-node__short">via WinRM</span>
+          </button>
+          <button class="arch-node arch-node--branch" data-node-id="linux" type="button" aria-pressed="false">
+            <span class="arch-node__label">Linux</span>
+            <span class="arch-node__short">via SSH</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="arch__detail" id="arch-detail" aria-live="polite">
+        <span class="arch__detail-layer" id="arch-detail-layer">{{ architecture_nodes[0].layer }}</span>
+        <h3 class="arch__detail-label" id="arch-detail-label">{{ architecture_nodes[0].label }}</h3>
+        <p class="arch__detail-purpose" id="arch-detail-purpose">{{ architecture_nodes[0].purpose }}</p>
+
+        <div class="arch__detail-meta">
+          <div>
+            <span class="arch__detail-meta-label">Communicates via</span>
+            <p id="arch-detail-comm">{{ architecture_nodes[0].communicates_via }}</p>
+          </div>
+          <div>
+            <span class="arch__detail-meta-label">Why this way</span>
+            <p id="arch-detail-why">{{ architecture_nodes[0].why }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="application/json" id="architecture-data">{{ architecture_nodes | tojson }}</script>
+</section>

@@ -1,0 +1,39 @@
+<section class="section" id="highlights">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Professional Highlights</div>
+      <h2 class="section-heading">The real work, in four pieces</h2>
+      <p class="section-lede">Not separate projects — four angles on the same automation platform, each with its own problem to solve.</p>
+    </div>
+
+    <div class="highlight-grid">
+      {% for h in highlights %}
+      <article class="highlight-card reveal" style="--reveal-delay: {{ loop.index0 * 70 }}ms">
+        <h3 class="highlight-card__title">{{ h.title }}</h3>
+
+        <div class="highlight-card__row">
+          <span class="highlight-card__label">Problem</span>
+          <p>{{ h.problem }}</p>
+        </div>
+        <div class="highlight-card__row">
+          <span class="highlight-card__label">Solution</span>
+          <p>{{ h.solution }}</p>
+        </div>
+
+        <div class="highlight-card__tags">
+          {% for t in h.tech %}
+          <span class="tag">{{ t }}</span>
+          {% endfor %}
+        </div>
+
+        <div class="highlight-card__outcome">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <path d="M5 13l4 4L19 7" />
+          </svg>
+          <p>{{ h.outcome }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

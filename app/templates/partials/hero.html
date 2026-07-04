@@ -1,0 +1,52 @@
+<section class="hero" id="hero">
+  <svg class="hero__network" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g class="hero__lines">
+      <line x1="150" y1="120" x2="420" y2="60" />
+      <line x1="420" y1="60" x2="680" y2="180" />
+      <line x1="680" y1="180" x2="950" y2="90" />
+      <line x1="150" y1="120" x2="280" y2="380" />
+      <line x1="280" y1="380" x2="600" y2="420" />
+      <line x1="600" y1="420" x2="680" y2="180" />
+      <line x1="280" y1="380" x2="180" y2="620" />
+      <line x1="600" y1="420" x2="180" y2="620" />
+    </g>
+    <g class="hero__lines hero__lines--active">
+      <line x1="600" y1="420" x2="880" y2="340" />
+      <line x1="880" y1="340" x2="1080" y2="480" />
+    </g>
+    <g class="hero__nodes">
+      <circle cx="150" cy="120" r="4" style="--delay: 0s" />
+      <circle cx="420" cy="60" r="3.5" style="--delay: -1.2s" />
+      <circle cx="680" cy="180" r="5" style="--delay: -2.4s" />
+      <circle cx="950" cy="90" r="3.5" style="--delay: -0.6s" />
+      <circle cx="280" cy="380" r="4" style="--delay: -3.1s" />
+      <circle cx="600" cy="420" r="5.5" style="--delay: -1.8s" />
+      <circle cx="880" cy="340" r="4" style="--delay: -2.7s" />
+      <circle cx="1080" cy="480" r="3.5" style="--delay: -0.3s" />
+      <circle cx="180" cy="620" r="4" style="--delay: -3.6s" />
+    </g>
+  </svg>
+
+  <div class="section-inner hero__content">
+    <div class="status-badge">
+      <span class="status-badge__dot" aria-hidden="true"></span>
+      {{ profile.status_badge }}
+    </div>
+
+    <h1 class="hero__name">{{ profile.name }}</h1>
+    <p class="hero__role">{{ profile.title }} <span class="hero__role-divider">—</span> {{ profile.tagline }}</p>
+    <p class="hero__intro">{{ profile.intro }}</p>
+
+    <div class="hero__actions">
+      <a href="{{ profile.resume_download_url }}" class="btn btn--primary">Resume</a>
+      <a href="{{ profile.github_url }}" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="{{ profile.linkedin_url }}" class="btn btn--secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="#contact" class="btn btn--secondary">Contact</a>
+    </div>
+  </div>
+
+  <a href="#about" class="hero__scroll-cue" aria-label="Scroll to About section">
+    <span>Scroll</span>
+    <span class="hero__scroll-line" aria-hidden="true"></span>
+  </a>
+</section>

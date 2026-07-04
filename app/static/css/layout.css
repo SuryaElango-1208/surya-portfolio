@@ -1,0 +1,99 @@
+/*
+  LAYOUT
+  ======
+  Structural rules only: containers, section rhythm, the grid system.
+  Note on specificity (per the studio's own lesson learned the hard way):
+  every section-padding rule here lives on a single .section class, and
+  section files never redeclare padding on their own root element — that's
+  exactly the kind of duplicate-selector fight where a later class-based
+  rule silently loses to an earlier one of equal specificity. One source
+  of truth for vertical rhythm, here, full stop.
+*/
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--content-padding);
+}
+
+.section {
+  padding-block: var(--section-padding-y);
+  position: relative;
+}
+
+.section-inner {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--content-padding);
+}
+
+/* Editorial sections (Hero, About): single column, generous, prose-led. */
+.section--editorial .section-inner {
+  max-width: 760px;
+}
+
+/* Section heading system, shared across every non-hero section. */
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-4);
+}
+
+.section-heading {
+  font-size: var(--text-3xl);
+  max-width: 20ch;
+  margin-bottom: var(--space-4);
+}
+
+.section-lede {
+  font-size: var(--text-lg);
+  max-width: 56ch;
+  color: var(--color-text-secondary);
+}
+
+.section-header {
+  margin-bottom: var(--space-16);
+}
+
+/* Reveal-on-scroll baseline. JS adds .is-visible; CSS never blocks content
+   for users without JS — see scrollReveal.js for the no-JS fallback logic. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--duration-slow) var(--ease-out-expo),
+    transform var(--duration-slow) var(--ease-out-expo);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Generic responsive grid, section files set --grid-min per use case. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 260px), 1fr));
+  gap: var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-block: calc(var(--section-padding-y) * 0.6);
+  }
+}

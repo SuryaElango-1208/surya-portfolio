@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+spidy/
+
+# Environment variables
+.env
+
+# Local database
+storage/*.db
+
+# macOS
+.DS_Store
+
+# Python packaging
+*.egg-info/

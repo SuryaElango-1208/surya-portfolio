@@ -1,0 +1,73 @@
+<section class="section" id="experience">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Experience</div>
+      <h2 class="section-heading">What I've actually worked on</h2>
+      <p class="section-lede">Each role, expanded — the problem, what I built, and what changed because of it.</p>
+    </div>
+
+    <div class="exp-list">
+      {% for role in experience %}
+      <article class="exp-card reveal" style="--reveal-delay: {{ loop.index0 * 80 }}ms">
+        <button
+          class="exp-card__header"
+          type="button"
+          aria-expanded="false"
+          aria-controls="exp-body-{{ role.id }}"
+          id="exp-toggle-{{ role.id }}"
+          data-exp-toggle
+        >
+          <span class="exp-card__year" aria-hidden="true">{{ role.period_start }}</span>
+
+          <span class="exp-card__heading">
+            <span class="exp-card__role">{{ role.role }}</span>
+            <span class="exp-card__meta">{{ role.company }} · {{ role.period }}</span>
+            <span class="exp-card__summary">{{ role.summary }}</span>
+          </span>
+
+          <svg class="exp-card__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+            <path d="M6 9l6 6 6-6" />
+          </svg>
+        </button>
+
+        <div class="exp-card__body-wrapper">
+          <div class="exp-card__body" id="exp-body-{{ role.id }}" role="region" aria-labelledby="exp-toggle-{{ role.id }}">
+            <div class="exp-card__grid">
+              <div class="exp-card__block">
+                <h4>The problem</h4>
+                <p>{{ role.problem }}</p>
+              </div>
+              <div class="exp-card__block">
+                <h4>What I built</h4>
+                <ul>
+                  {% for point in role.solution %}
+                  <li>{{ point }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+              <div class="exp-card__block">
+                <h4>Impact</h4>
+                <ul>
+                  {% for point in role.impact %}
+                  <li>{{ point }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
+
+            <div class="exp-card__tags">
+              {% for t in role.tech %}
+              <span class="tag">{{ t }}</span>
+              {% endfor %}
+            </div>
+
+            {% if role.extra %}
+            <p class="exp-card__extra">{{ role.extra }}</p>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

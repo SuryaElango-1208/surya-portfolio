@@ -1,0 +1,17 @@
+<section class="section" id="achievement">
+  <div class="section-inner">
+    <div class="achievement reveal">
+      <div class="achievement__glow" aria-hidden="true"></div>
+
+      <svg class="achievement__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+        <circle cx="12" cy="8" r="5.5" />
+        <path d="M8.5 13 7 21l5-2.5L17 21l-1.5-8" />
+      </svg>
+
+      <span class="achievement__eyebrow">{{ achievement.issuer }} · {{ achievement.year }}</span>
+      <h2 class="achievement__title">{{ achievement.title }}</h2>
+      <p class="achievement__desc">{{ achievement.description }}</p>
+      <p class="achievement__why">{{ achievement.why_it_matters }}</p>
+    </div>
+  </div>
+</section>

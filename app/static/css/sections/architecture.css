@@ -1,0 +1,190 @@
+.arch {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.arch__diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.arch-node {
+  width: 100%;
+  max-width: 360px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  text-align: center;
+  transition: border-color var(--duration-base) var(--ease-out-expo),
+    background-color var(--duration-base) var(--ease-out-expo),
+    transform var(--duration-base) var(--ease-out-expo);
+}
+
+.arch-node:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-2px);
+}
+
+.arch-node.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-dim);
+}
+
+.arch-node.is-active .arch-node__label {
+  color: var(--color-accent);
+}
+
+.arch-node--engine {
+  max-width: 400px;
+}
+
+.arch-node__label {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-text-primary);
+  transition: color var(--duration-base) var(--ease-out-expo);
+}
+
+.arch-node__short {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-text-tertiary);
+}
+
+/* ---- Connectors ---- */
+.arch__connector {
+  display: flex;
+  justify-content: center;
+  height: 44px;
+}
+
+.arch__connector span {
+  position: relative;
+  width: 1px;
+  background: var(--color-border-strong);
+  overflow: hidden;
+}
+
+.arch__connector span::after {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: 0;
+  width: 100%;
+  height: 24px;
+  background: linear-gradient(var(--color-accent), transparent);
+  animation: connector-flow 2.6s linear infinite;
+}
+
+@keyframes connector-flow {
+  to { transform: translateY(68px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arch__connector span::after {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+/* ---- Branch fan-out: one stem down, one bar across, three nodes below ---- */
+.arch__branches {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  padding-top: var(--space-8);
+}
+
+.arch__branches::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 16.66%;
+  right: 16.66%;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+.arch-node--branch {
+  max-width: none;
+}
+
+/* ---- Detail panel ---- */
+.arch__detail {
+  position: sticky;
+  top: 100px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+}
+
+.arch__detail-layer {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent);
+  margin-bottom: var(--space-3);
+}
+
+.arch__detail-label {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-4);
+}
+
+.arch__detail-purpose {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.arch__detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.arch__detail-meta-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-tertiary);
+  margin-bottom: var(--space-2);
+}
+
+.arch__detail-meta p {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .arch {
+    grid-template-columns: 1fr;
+  }
+  .arch__detail {
+    position: static;
+  }
+}
+
+@media (max-width: 560px) {
+  .arch__branches {
+    grid-template-columns: 1fr;
+  }
+  .arch__branches::before {
+    display: none;
+  }
+}

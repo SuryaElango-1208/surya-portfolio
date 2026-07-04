@@ -1,0 +1,21 @@
+<section class="section" id="skills">
+  <div class="section-inner">
+    <div class="section-header reveal">
+      <div class="section-eyebrow">Skills</div>
+      <h2 class="section-heading">The toolkit, organized by what it's for</h2>
+    </div>
+
+    <div class="skills-grid">
+      {% for category, items in skills.items() %}
+      <div class="skills-card reveal" style="--reveal-delay: {{ loop.index0 * 50 }}ms">
+        <h3 class="skills-card__title">{{ category }}</h3>
+        <div class="skills-card__tags">
+          {% for item in items %}
+          <span class="tag">{{ item }}</span>
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
