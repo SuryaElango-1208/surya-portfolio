@@ -14,11 +14,36 @@ contact_service.py BEFORE this is ever called.
 """
 import logging
 import smtplib
+import socket
+from contextlib import contextmanager
 from email.message import EmailMessage
 
 from app.core.config import get_settings
 
 logger = logging.getLogger("portfolio.email")
+
+
+@contextmanager
+def _force_ipv4_dns():
+    """Some hosts (Render's containers, notably) have no outbound IPv6
+    route, but DNS lookups for mail providers like Gmail can still return
+    an IPv6 (AAAA) address alongside the IPv4 one. smtplib just connects
+    to whatever socket.getaddrinfo() hands back first — if that's the
+    IPv6 address, the connection dies immediately with "Network is
+    unreachable" before ever trying the IPv4 address that would have
+    worked fine. This temporarily restricts DNS resolution to IPv4 only,
+    for the duration of the SMTP connection, then restores the normal
+    resolver so nothing else in the process is affected."""
+    original_getaddrinfo = socket.getaddrinfo
+
+    def ipv4_only_getaddrinfo(host, port, family=0, type=0, proto=0, flags=0):
+        return original_getaddrinfo(host, port, socket.AF_INET, type, proto, flags)
+
+    socket.getaddrinfo = ipv4_only_getaddrinfo
+    try:
+        yield
+    finally:
+        socket.getaddrinfo = original_getaddrinfo
 
 
 def send_contact_notification(name: str, email: str, message: str) -> bool:
@@ -38,7 +63,7 @@ def send_contact_notification(name: str, email: str, message: str) -> bool:
     msg.set_content(f"From: {name} <{email}>\n\n{message}")
 
     try:
-        with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=10) as server:
+        with _force_ipv4_dns(), smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=10) as server:
             if settings.smtp_use_tls:
                 server.starttls()
             server.login(settings.smtp_username, settings.smtp_password)
