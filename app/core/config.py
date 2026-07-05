@@ -30,19 +30,23 @@ class Settings(BaseSettings):
     contact_receiver_email: str = "surya.re1208@gmail.com"
     contact_rate_limit_per_hour: int = 5
 
-    # SMTP is optional. Leave these blank and the site still works fully —
-    # submissions are safely stored in SQLite either way. See
-    # app/services/email_service.py for how the "unconfigured" case is
-    # handled without breaking the contact form.
-    smtp_host: str | None = None
-    smtp_port: int = 587
-    smtp_username: str | None = None
-    smtp_password: str | None = None
-    smtp_use_tls: bool = True
+    # Email notification is optional. Leave this blank and the site still
+    # works fully — submissions are safely stored in SQLite either way.
+    # See app/services/email_service.py for how the "unconfigured" case
+    # is handled without breaking the contact form.
+    #
+    # Sent via Resend's HTTPS API rather than raw SMTP: most hosting
+    # platforms (Render included) either block outbound SMTP ports
+    # outright or silently drop that traffic at the network level, which
+    # shows up as a connection timeout no client-side code can work
+    # around. An HTTPS call on port 443 — the same port every other web
+    # request already uses — sidesteps that whole class of problem.
+    resend_api_key: str | None = None
+    resend_from_email: str = "Portfolio Contact Form <onboarding@resend.dev>"
 
     @property
     def email_is_configured(self) -> bool:
-        return bool(self.smtp_host and self.smtp_username and self.smtp_password)
+        return bool(self.resend_api_key)
 
 
 @lru_cache

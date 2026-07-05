@@ -19,9 +19,9 @@ Then open **http://localhost:8000**.
 
 The contact form works out of the box — submissions are saved to
 `storage/contact_submissions.db` (SQLite) even with a completely empty
-`.env`. To also get an email when someone submits it, fill in the `SMTP_*`
-values in `.env` (a Gmail App Password works fine for `SMTP_HOST=smtp.gmail.com`,
-`SMTP_PORT=587`).
+`.env`. To also get an email when someone submits it, sign up free at
+[resend.com](https://resend.com), verify the email you sign up with,
+create an API key, and fill in `RESEND_API_KEY` in `.env`.
 
 ## Project structure
 
@@ -33,7 +33,7 @@ app/
 ├── models/contact.py        Pydantic request/response schemas
 ├── services/
 │   ├── contact_service.py   persistence (SQLite) + honeypot handling
-│   └── email_service.py     SMTP wrapper, safe no-op if unconfigured
+│   └── email_service.py     Resend HTTPS API wrapper, safe no-op if unconfigured
 ├── routers/
 │   ├── pages.py             GET /            → renders the site
 │   ├── contact.py           POST /api/contact
@@ -82,8 +82,8 @@ systems (SAP, Windows, Linux) talk to each other.
   "Resume downloaded" is a much stronger recruiter-interest signal than a
   page view.
 - **The contact route is a plain `def`, not `async def`** — it does
-  blocking I/O (SQLite, potentially SMTP). FastAPI runs sync routes in a
-  thread pool automatically; mixing blocking calls into an `async def`
+  blocking I/O (SQLite, an HTTPS call to Resend). FastAPI runs sync routes
+  in a thread pool automatically; mixing blocking calls into an `async def`
   route would stall the whole event loop, not just that request.
 - **Rate limiting is a small in-memory dict**, intentionally not backed by
   Redis or similar — correct for a single-process deployment, and called
