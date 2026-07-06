@@ -51,6 +51,9 @@
   width: 42px;
   height: 42px;
   padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: var(--radius-full);
   border: 1px solid var(--color-border-strong);
   color: var(--color-text-secondary);
@@ -64,6 +67,17 @@
 .btn--icon svg {
   width: 18px;
   height: 18px;
+}
+
+/* Deliberate asymmetry: the moon (dark mode) sits slightly left of
+   center, the sun (light mode) slightly right — a small stylistic touch
+   rather than dead-center in both states. */
+.btn--icon #icon-moon {
+  transform: translateX(-10px);
+}
+
+.btn--icon #icon-sun {
+  transform: translateX(9px);
 }
 
 /* ---------- Cards ---------- */
