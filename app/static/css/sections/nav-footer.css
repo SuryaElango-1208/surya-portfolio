@@ -43,6 +43,25 @@
   border-bottom-color: var(--color-border);
 }
 
+/* The transparent-until-scrolled effect above works well on desktop,
+   where there's enough space that the hero's content doesn't sit right
+   up against the nav. On narrow/mobile widths, the hero's own quick-link
+   buttons are close enough to the top that they visually collide with
+   the nav's logo, theme toggle, and burger button while the nav is still
+   transparent (i.e. before the visitor has scrolled at all) — most
+   noticeably when opening the mobile menu right at the top of the page.
+   Keeping the nav solid at all times on mobile avoids that collision
+   without changing anything about the desktop experience. Same
+   breakpoint as .nav__burger's visibility, for consistency. */
+@media (max-width: 860px) {
+  .nav__inner {
+    background: var(--color-bg-overlay);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    border-bottom-color: var(--color-border);
+  }
+}
+
 .nav__mark {
   font-family: var(--font-mono);
   font-size: var(--text-sm);

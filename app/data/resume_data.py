@@ -33,11 +33,12 @@ PROFILE = {
 ABOUT = {
     "paragraphs": [
         (
-            "My degree is in Electronics and Communication Engineering, not "
-            "Computer Science — but the more time I spent around systems, "
-            "the more I gravitated toward the code deciding how they "
-            "actually behave. That's where I ended up: writing Python that "
-            "sits between SAP, Windows, and Linux, and makes them cooperate."
+            "I write Python that sits between SAP, Windows, and Linux, "
+            "automating the manual work that keeps enterprise systems "
+            "running. I came to software through Electronics and "
+            "Communication Engineering, but the more time I spent around "
+            "real-world systems, the more I wanted to build the software "
+            "that connected them."
         ),
         (
             "Most of what I build is invisible by design. If a piece of "
