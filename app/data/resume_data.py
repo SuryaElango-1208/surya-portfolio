@@ -250,7 +250,7 @@ SKILLS = {
 CERTIFICATIONS = [
     {"name": "Reinvention with Agentic AI Learning Program", "issuer": "Accenture", "year": "2026"},
     {"name": "SQL (Intermediate)", "issuer": "HackerRank", "year": None},
-    {"name": "Oracle Cloud Infrastructure 2024 AI Certified Foundations Associate", "issuer": "Oracle", "year": "2024"},
+    {"name": "Microsoft Certified: GitHub Foundations (GH-900)", "issuer": "Microsoft", "year": "2026"},
     {"name": "Data Science using Python", "issuer": "Verzeo", "year": None},
 ]
 
